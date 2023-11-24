@@ -26,9 +26,15 @@ class InApp extends StatefulWidget {
 }
 
 class _InAppState extends State<InApp> {
+<<<<<<< HEAD
   late dynamic _purchaseUpdatedSubscription;
   late dynamic _purchaseErrorSubscription;
   late dynamic _connectionSubscription;
+=======
+  StreamSubscription _purchaseUpdatedSubscription;
+  StreamSubscription _purchaseErrorSubscription;
+  StreamSubscription _conectionSubscription;
+>>>>>>> new-version
   final List<String> _productLists = Platform.isAndroid
       ? [
           'android.test.purchased',
@@ -38,6 +44,10 @@ class _InAppState extends State<InApp> {
         ]
       : ['com.cooni.point1000', 'com.cooni.point5000'];
 
+<<<<<<< HEAD
+=======
+  String _platformVersion = 'Unknown';
+>>>>>>> new-version
   List<IAPItem> _items = [];
   List<PurchasedItem> _purchases = [];
 
@@ -49,15 +59,27 @@ class _InAppState extends State<InApp> {
 
   @override
   void dispose() {
+<<<<<<< HEAD
     if (_connectionSubscription != null) {
       _connectionSubscription.cancel();
       _connectionSubscription = null;
+=======
+    if (_conectionSubscription != null) {
+      _conectionSubscription.cancel();
+      _conectionSubscription = null;
+>>>>>>> new-version
     }
     super.dispose();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
+<<<<<<< HEAD
+=======
+    String platformVersion;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+
+>>>>>>> new-version
     // prepare
     var result = await FlutterInappPurchase.instance.initialize();
     print('result: $result');
@@ -67,6 +89,13 @@ class _InAppState extends State<InApp> {
     // setState to update our non-existent appearance.
     if (!mounted) return;
 
+<<<<<<< HEAD
+=======
+    setState(() {
+      _platformVersion = platformVersion;
+    });
+
+>>>>>>> new-version
     // refresh items for android
     try {
       String msg = await FlutterInappPurchase.instance.consumeAll();
@@ -75,7 +104,11 @@ class _InAppState extends State<InApp> {
       print('consumeAllItems error: $err');
     }
 
+<<<<<<< HEAD
     _connectionSubscription =
+=======
+    _conectionSubscription =
+>>>>>>> new-version
         FlutterInappPurchase.connectionUpdated.listen((connected) {
       print('connected: $connected');
     });
@@ -92,7 +125,11 @@ class _InAppState extends State<InApp> {
   }
 
   void _requestPurchase(IAPItem item) {
+<<<<<<< HEAD
     FlutterInappPurchase.instance.requestPurchase(item.productId!);
+=======
+    FlutterInappPurchase.instance.requestPurchase(item.productId);
+>>>>>>> new-version
   }
 
   Future _getProduct() async {
@@ -110,9 +147,15 @@ class _InAppState extends State<InApp> {
   }
 
   Future _getPurchases() async {
+<<<<<<< HEAD
     List<PurchasedItem>? items =
         await FlutterInappPurchase.instance.getAvailablePurchases();
     for (var item in items!) {
+=======
+    List<PurchasedItem> items =
+        await FlutterInappPurchase.instance.getAvailablePurchases();
+    for (var item in items) {
+>>>>>>> new-version
       print('${item.toString()}');
       this._purchases.add(item);
     }
@@ -124,9 +167,15 @@ class _InAppState extends State<InApp> {
   }
 
   Future _getPurchaseHistory() async {
+<<<<<<< HEAD
     List<PurchasedItem>? items =
         await FlutterInappPurchase.instance.getPurchaseHistory();
     for (var item in items!) {
+=======
+    List<PurchasedItem> items =
+        await FlutterInappPurchase.instance.getPurchaseHistory();
+    for (var item in items) {
+>>>>>>> new-version
       print('${item.toString()}');
       this._purchases.add(item);
     }
@@ -155,7 +204,11 @@ class _InAppState extends State<InApp> {
                         ),
                       ),
                     ),
+<<<<<<< HEAD
                     MaterialButton(
+=======
+                    FlatButton(
+>>>>>>> new-version
                       color: Colors.orange,
                       onPressed: () {
                         print("---------- Buy Item Button Pressed");
@@ -222,7 +275,11 @@ class _InAppState extends State<InApp> {
             children: <Widget>[
               Container(
                 child: Text(
+<<<<<<< HEAD
                   'Running on: ${Platform.operatingSystem} - ${Platform.operatingSystemVersion}\n',
+=======
+                  'Running on: $_platformVersion\n',
+>>>>>>> new-version
                   style: TextStyle(fontSize: 18.0),
                 ),
               ),
@@ -235,7 +292,11 @@ class _InAppState extends State<InApp> {
                         width: buttonWidth,
                         height: 60.0,
                         margin: EdgeInsets.all(7.0),
+<<<<<<< HEAD
                         child: MaterialButton(
+=======
+                        child: FlatButton(
+>>>>>>> new-version
                           color: Colors.amber,
                           padding: EdgeInsets.all(0.0),
                           onPressed: () async {
@@ -258,7 +319,11 @@ class _InAppState extends State<InApp> {
                         width: buttonWidth,
                         height: 60.0,
                         margin: EdgeInsets.all(7.0),
+<<<<<<< HEAD
                         child: MaterialButton(
+=======
+                        child: FlatButton(
+>>>>>>> new-version
                           color: Colors.amber,
                           padding: EdgeInsets.all(0.0),
                           onPressed: () async {
@@ -298,7 +363,11 @@ class _InAppState extends State<InApp> {
                             width: buttonWidth,
                             height: 60.0,
                             margin: EdgeInsets.all(7.0),
+<<<<<<< HEAD
                             child: MaterialButton(
+=======
+                            child: FlatButton(
+>>>>>>> new-version
                               color: Colors.green,
                               padding: EdgeInsets.all(0.0),
                               onPressed: () {
@@ -320,7 +389,11 @@ class _InAppState extends State<InApp> {
                             width: buttonWidth,
                             height: 60.0,
                             margin: EdgeInsets.all(7.0),
+<<<<<<< HEAD
                             child: MaterialButton(
+=======
+                            child: FlatButton(
+>>>>>>> new-version
                               color: Colors.green,
                               padding: EdgeInsets.all(0.0),
                               onPressed: () {
@@ -343,7 +416,11 @@ class _InAppState extends State<InApp> {
                             width: buttonWidth,
                             height: 60.0,
                             margin: EdgeInsets.all(7.0),
+<<<<<<< HEAD
                             child: MaterialButton(
+=======
+                            child: FlatButton(
+>>>>>>> new-version
                               color: Colors.green,
                               padding: EdgeInsets.all(0.0),
                               onPressed: () {

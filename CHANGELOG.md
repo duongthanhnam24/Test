@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## 5.6.0
 * refactor: android init connection
   ```
@@ -50,6 +51,15 @@
 ## New Contributors
 
 - @offline-first made their first contribution in https://github.com/dooboolab/flutter_inapp_purchase/pull/365
+=======
+## 5.3.0
+
+## What's Changed
+* Refactor java to kotlin, add showInAppMessageAndroid by @offline-first in https://github.com/dooboolab/flutter_inapp_purchase/pull/365
+
+## New Contributors
+* @offline-first made their first contribution in https://github.com/dooboolab/flutter_inapp_purchase/pull/365
+>>>>>>> new-version
 
 **Full Changelog**: https://github.com/dooboolab/flutter_inapp_purchase/compare/5.2.0...5.3.0
 

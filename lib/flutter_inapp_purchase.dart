@@ -13,7 +13,11 @@ import 'utils.dart';
 export 'modules.dart';
 
 /// A enumeration of in-app purchase types for Android
+<<<<<<< HEAD
 /// https://developer.android.com/reference/com/android/billingclient/api/BillingClient.ProductType
+=======
+/// https://developer.android.com/reference/com/android/billingclient/api/BillingClient.SkuType.html#constants_2
+>>>>>>> new-version
 enum _TypeInApp { inapp, subs }
 
 class FlutterInappPurchase {
@@ -147,12 +151,20 @@ class FlutterInappPurchase {
   /// Retrieves a list of products from the store on `Android` and `iOS`.
   ///
   /// `iOS` also returns subscriptions.
+<<<<<<< HEAD
   Future<List<IAPItem>> getProducts(List<String> productIds) async {
+=======
+  Future<List<IAPItem>> getProducts(List<String> skus) async {
+>>>>>>> new-version
     if (_platform.isAndroid) {
       dynamic result = await _channel.invokeMethod(
         'getProducts',
         <String, dynamic>{
+<<<<<<< HEAD
           'productIds': productIds.toList(),
+=======
+          'skus': skus.toList(),
+>>>>>>> new-version
         },
       );
       return extractItems(result);
@@ -160,7 +172,11 @@ class FlutterInappPurchase {
       dynamic result = await _channel.invokeMethod(
         'getItems',
         <String, dynamic>{
+<<<<<<< HEAD
           'skus': productIds.toList(),
+=======
+          'skus': skus.toList(),
+>>>>>>> new-version
         },
       );
       return extractItems(json.encode(result));
@@ -172,12 +188,20 @@ class FlutterInappPurchase {
   /// Retrieves subscriptions on `Android` and `iOS`.
   ///
   /// `iOS` also returns non-subscription products.
+<<<<<<< HEAD
   Future<List<IAPItem>> getSubscriptions(List<String> productIds) async {
+=======
+  Future<List<IAPItem>> getSubscriptions(List<String> skus) async {
+>>>>>>> new-version
     if (_platform.isAndroid) {
       dynamic result = await _channel.invokeMethod(
         'getSubscriptions',
         <String, dynamic>{
+<<<<<<< HEAD
           'productIds': productIds.toList(),
+=======
+          'skus': skus.toList(),
+>>>>>>> new-version
         },
       );
       return extractItems(result);
@@ -185,7 +209,11 @@ class FlutterInappPurchase {
       dynamic result = await _channel.invokeMethod(
         'getItems',
         <String, dynamic>{
+<<<<<<< HEAD
           'skus': productIds.toList(),
+=======
+          'skus': skus.toList(),
+>>>>>>> new-version
         },
       );
       return extractItems(json.encode(result));
@@ -203,14 +231,22 @@ class FlutterInappPurchase {
       final dynamic getInappPurchaseHistory = await _channel.invokeMethod(
         'getPurchaseHistoryByType',
         <String, dynamic>{
+<<<<<<< HEAD
           'type': _TypeInApp.inapp.name, // describeEnum 대신 name 속성 사용
+=======
+          'type': describeEnum(_TypeInApp.inapp),
+>>>>>>> new-version
         },
       );
 
       final dynamic getSubsPurchaseHistory = await _channel.invokeMethod(
         'getPurchaseHistoryByType',
         <String, dynamic>{
+<<<<<<< HEAD
           'type': _TypeInApp.subs.name, // describeEnum 대신 name 속성 사용
+=======
+          'type': describeEnum(_TypeInApp.subs),
+>>>>>>> new-version
         },
       );
 
@@ -242,14 +278,22 @@ class FlutterInappPurchase {
       dynamic result1 = await _channel.invokeMethod(
         'getAvailableItemsByType',
         <String, dynamic>{
+<<<<<<< HEAD
           'type': _TypeInApp.inapp.name,
+=======
+          'type': describeEnum(_TypeInApp.inapp),
+>>>>>>> new-version
         },
       );
 
       dynamic result2 = await _channel.invokeMethod(
         'getAvailableItemsByType',
         <String, dynamic>{
+<<<<<<< HEAD
           'type': _TypeInApp.subs.name,
+=======
+          'type': describeEnum(_TypeInApp.subs),
+>>>>>>> new-version
         },
       );
       return extractPurchased(result1)! + extractPurchased(result2)!;
@@ -267,6 +311,7 @@ class FlutterInappPurchase {
   ///
   /// Check [AndroidProrationMode] for valid proration values
   /// Identical to [requestSubscription] on `iOS`.
+<<<<<<< HEAD
   /// [purchaseTokenAndroid] is used when upgrading subscriptions and sets the old purchase token
   /// [offerTokenIndex] is now required for billing 5.0, if upgraded from billing 4.0 this will default to 0
   Future requestPurchase(String productId,
@@ -278,15 +323,34 @@ class FlutterInappPurchase {
       return await _channel.invokeMethod('buyItemByType', <String, dynamic>{
         'type': _TypeInApp.inapp.name,
         'productId': productId,
+=======
+  Future requestPurchase(
+    String sku, {
+    String? obfuscatedAccountId,
+    String? purchaseTokenAndroid,
+    String? obfuscatedProfileIdAndroid,
+  }) async {
+    if (_platform.isAndroid) {
+      return await _channel.invokeMethod('buyItemByType', <String, dynamic>{
+        'type': describeEnum(_TypeInApp.inapp),
+        'sku': sku,
+>>>>>>> new-version
         'prorationMode': -1,
         'obfuscatedAccountId': obfuscatedAccountId,
         'obfuscatedProfileId': obfuscatedProfileIdAndroid,
         'purchaseToken': purchaseTokenAndroid,
+<<<<<<< HEAD
         'offerTokenIndex': offerTokenIndex
       });
     } else if (_platform.isIOS) {
       return await _channel.invokeMethod('buyProduct', <String, dynamic>{
         'sku': productId,
+=======
+      });
+    } else if (_platform.isIOS) {
+      return await _channel.invokeMethod('buyProduct', <String, dynamic>{
+        'sku': sku,
+>>>>>>> new-version
         'forUser': obfuscatedAccountId,
       });
     }
@@ -301,29 +365,49 @@ class FlutterInappPurchase {
   ///
   /// Check [AndroidProrationMode] for valid proration values
   /// Identical to [requestPurchase] on `iOS`.
+<<<<<<< HEAD
   /// [purchaseTokenAndroid] is used when upgrading subscriptions and sets the old purchase token
   /// [offerTokenIndex] is now required for billing 5.0, if upgraded from billing 4.0 this will default to 0
   Future requestSubscription(
     String productId, {
+=======
+  Future requestSubscription(
+    String sku, {
+>>>>>>> new-version
     int? prorationModeAndroid,
     String? obfuscatedAccountIdAndroid,
     String? obfuscatedProfileIdAndroid,
     String? purchaseTokenAndroid,
+<<<<<<< HEAD
     int? offerTokenIndex,
   }) async {
     if (_platform.isAndroid) {
       return await _channel.invokeMethod('buyItemByType', <String, dynamic>{
         'type': _TypeInApp.subs.name,
         'productId': productId,
+=======
+  }) async {
+    if (_platform.isAndroid) {
+      return await _channel.invokeMethod('buyItemByType', <String, dynamic>{
+        'type': describeEnum(_TypeInApp.subs),
+        'sku': sku,
+>>>>>>> new-version
         'prorationMode': prorationModeAndroid ?? -1,
         'obfuscatedAccountId': obfuscatedAccountIdAndroid,
         'obfuscatedProfileId': obfuscatedProfileIdAndroid,
         'purchaseToken': purchaseTokenAndroid,
+<<<<<<< HEAD
         'offerTokenIndex': offerTokenIndex,
       });
     } else if (_platform.isIOS) {
       return await _channel.invokeMethod('buyProduct', <String, dynamic>{
         'sku': productId,
+=======
+      });
+    } else if (_platform.isIOS) {
+      return await _channel.invokeMethod('buyProduct', <String, dynamic>{
+        'sku': sku,
+>>>>>>> new-version
       });
     }
     throw PlatformException(
@@ -547,7 +631,12 @@ class FlutterInappPurchase {
     Duration grace = const Duration(days: 3),
   }) async {
     if (_platform.isIOS) {
+<<<<<<< HEAD
       var history = await getPurchaseHistory();
+=======
+      var history =
+          await (getPurchaseHistory() as Future<List<PurchasedItem>?>);
+>>>>>>> new-version
 
       if (history == null) {
         return false;
@@ -562,9 +651,16 @@ class FlutterInappPurchase {
 
       return false;
     } else if (_platform.isAndroid) {
+<<<<<<< HEAD
       var purchases = await (getAvailablePurchases());
 
       for (var purchase in purchases ?? []) {
+=======
+      var purchases =
+          await (getAvailablePurchases() as FutureOr<List<PurchasedItem>>);
+
+      for (var purchase in purchases) {
+>>>>>>> new-version
         if (purchase.productId == sku) return true;
       }
 

@@ -31,11 +31,20 @@ class IAPItem {
   final List<DiscountIOS>? discountsIOS;
 
   /// android only
+<<<<<<< HEAD
   final String? signatureAndroid;
   final List<SubscriptionOfferAndroid>? subscriptionOffersAndroid;
 
   final String? subscriptionPeriodAndroid;
   final String freeTrialPeriodAndroid = "default_value";
+=======
+  final String? subscriptionPeriodAndroid;
+  final int? introductoryPriceCyclesAndroid;
+  final String? introductoryPricePeriodAndroid;
+  final String? freeTrialPeriodAndroid;
+  final String? signatureAndroid;
+
+>>>>>>> new-version
   final String? iconUrl;
   final String? originalJson;
   final String originalPrice;
@@ -63,13 +72,25 @@ class IAPItem {
             json['subscriptionPeriodUnitIOS'] as String?,
         subscriptionPeriodAndroid =
             json['subscriptionPeriodAndroid'] as String?,
+<<<<<<< HEAD
+=======
+        introductoryPriceCyclesAndroid =
+            json['introductoryPriceCyclesAndroid'] as int?,
+        introductoryPricePeriodAndroid =
+            json['introductoryPricePeriodAndroid'] as String?,
+        freeTrialPeriodAndroid = json['freeTrialPeriodAndroid'] as String?,
+>>>>>>> new-version
         signatureAndroid = json['signatureAndroid'] as String?,
         iconUrl = json['iconUrl'] as String?,
         originalJson = json['originalJson'] as String?,
         originalPrice = json['originalPrice'].toString(),
+<<<<<<< HEAD
         discountsIOS = _extractDiscountIOS(json['discounts']),
         subscriptionOffersAndroid =
             _extractSubscriptionOffersAndroid(json['subscriptionOffers']);
+=======
+        discountsIOS = _extractDiscountIOS(json['discounts']);
+>>>>>>> new-version
 
   /// wow, i find if i want to save a IAPItem, there is not "toJson" to cast it into String...
   /// i'm sorry to see that... so,
@@ -98,7 +119,17 @@ class IAPItem {
         this.introductoryPriceNumberOfPeriodsIOS;
     data['introductoryPriceSubscriptionPeriodIOS'] =
         this.introductoryPriceSubscriptionPeriodIOS;
+<<<<<<< HEAD
     data['subscriptionPeriodAndroid'] = this.subscriptionPeriodAndroid;
+=======
+
+    data['subscriptionPeriodAndroid'] = this.subscriptionPeriodAndroid;
+    data['introductoryPriceCyclesAndroid'] =
+        this.introductoryPriceCyclesAndroid;
+    data['introductoryPricePeriodAndroid'] =
+        this.introductoryPricePeriodAndroid;
+    data['freeTrialPeriodAndroid'] = this.freeTrialPeriodAndroid;
+>>>>>>> new-version
     data['signatureAndroid'] = this.signatureAndroid;
 
     data['iconUrl'] = this.iconUrl;
@@ -118,12 +149,22 @@ class IAPItem {
         'title: $title, '
         'description: $description, '
         'introductoryPrice: $introductoryPrice, '
+<<<<<<< HEAD
+=======
+        'introductoryPricePaymentModeIOS: $introductoryPrice, '
+>>>>>>> new-version
         'subscriptionPeriodNumberIOS: $subscriptionPeriodNumberIOS, '
         'subscriptionPeriodUnitIOS: $subscriptionPeriodUnitIOS, '
         'introductoryPricePaymentModeIOS: $introductoryPricePaymentModeIOS, '
         'introductoryPriceNumberOfPeriodsIOS: $introductoryPriceNumberOfPeriodsIOS, '
         'introductoryPriceSubscriptionPeriodIOS: $introductoryPriceSubscriptionPeriodIOS, '
         'subscriptionPeriodAndroid: $subscriptionPeriodAndroid, '
+<<<<<<< HEAD
+=======
+        'introductoryPriceCyclesAndroid: $introductoryPriceCyclesAndroid, '
+        'introductoryPricePeriodAndroid: $introductoryPricePeriodAndroid, '
+        'freeTrialPeriodAndroid: $freeTrialPeriodAndroid, '
+>>>>>>> new-version
         'iconUrl: $iconUrl, '
         'originalJson: $originalJson, '
         'originalPrice: $originalPrice, '
@@ -145,6 +186,7 @@ class IAPItem {
 
     return discounts;
   }
+<<<<<<< HEAD
 
   static List<SubscriptionOfferAndroid>? _extractSubscriptionOffersAndroid(
       dynamic json) {
@@ -208,6 +250,8 @@ class PricingPhaseAndroid {
         currencyCode = json["currencyCode"] as String?,
         recurrenceMode = json["recurrenceMode"] as int?,
         billingCycleCount = json["billingCycleCount"] as int?;
+=======
+>>>>>>> new-version
 }
 
 class DiscountIOS {

@@ -2,6 +2,10 @@ package com.dooboolab.flutterinapppurchase
 
 import android.os.Handler
 import io.flutter.plugin.common.MethodChannel
+<<<<<<< HEAD
+=======
+import java.lang.Runnable
+>>>>>>> new-version
 import android.os.Looper
 
 // MethodChannel.Result wrapper that responds on the platform thread.
@@ -10,6 +14,7 @@ class MethodResultWrapper internal constructor(
     private val safeChannel: MethodChannel
 ) : MethodChannel.Result {
     private val handler: Handler = Handler(Looper.getMainLooper())
+<<<<<<< HEAD
     private var exhausted: Boolean = false
     override fun success(result: Any?) {
         if (!exhausted) {
@@ -33,6 +38,18 @@ class MethodResultWrapper internal constructor(
 
             handler.post { safeResult.notImplemented() }
         }
+=======
+    override fun success(result: Any?) {
+        handler.post { safeResult.success(result) }
+    }
+
+    override fun error(errorCode: String, errorMessage: String?, errorDetails: Any?) {
+        handler.post { safeResult.error(errorCode, errorMessage, errorDetails) }
+    }
+
+    override fun notImplemented() {
+        handler.post { safeResult.notImplemented() }
+>>>>>>> new-version
     }
 
     fun invokeMethod(method: String?, arguments: Any?) {

@@ -3,11 +3,21 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:flutter_test/flutter_test.dart';
+<<<<<<< HEAD
 import 'package:platform/platform.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final MethodChannel channel = FlutterInappPurchase.channel;
+=======
+import 'package:http/http.dart';
+import 'package:platform/platform.dart';
+import 'package:http/testing.dart';
+import 'package:http/http.dart' as http;
+
+void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+>>>>>>> new-version
 
   group('FlutterInappPurchase', () {
     group('showInAppMessageAndroid', () {
@@ -17,8 +27,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "android")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return "ready";
           });
@@ -48,8 +63,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "android")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return "All items have been consumed";
           });
@@ -96,8 +116,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "android")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return "Billing client ready";
           });
@@ -126,8 +151,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "ios")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return "true";
           });
@@ -153,7 +183,11 @@ void main() {
     group('getProducts', () {
       group('for Android', () {
         final List<MethodCall> log = <MethodCall>[];
+<<<<<<< HEAD
         List<String> productIds = []..add("testsku");
+=======
+        List<String> skus = []..add("testsku");
+>>>>>>> new-version
 
         final dynamic result = """[
           {
@@ -172,6 +206,7 @@ void main() {
             "subscriptionPeriodNumberIOS": "3",
             "introductoryPriceCyclesAndroid": 4,
             "introductoryPricePeriodAndroid": "5",
+<<<<<<< HEAD
             "freeTrialPeriodAndroid": "6",
             "subscriptionOffers": [
               {
@@ -190,6 +225,9 @@ void main() {
                 ]
               }
             ]
+=======
+            "freeTrialPeriodAndroid": "6"
+>>>>>>> new-version
           }
         ]""";
 
@@ -197,8 +235,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "android")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return result;
           });
@@ -209,12 +252,20 @@ void main() {
         });
 
         test('invokes correct method', () async {
+<<<<<<< HEAD
           await FlutterInappPurchase.instance.getProducts(productIds);
+=======
+          await FlutterInappPurchase.instance.getProducts(skus);
+>>>>>>> new-version
           expect(log, <Matcher>[
             isMethodCall(
               'getProducts',
               arguments: <String, dynamic>{
+<<<<<<< HEAD
                 'productIds': productIds,
+=======
+                'skus': skus,
+>>>>>>> new-version
               },
             ),
           ]);
@@ -222,7 +273,11 @@ void main() {
 
         test('returns correct result', () async {
           List<IAPItem> products =
+<<<<<<< HEAD
               await FlutterInappPurchase.instance.getProducts(productIds);
+=======
+              await FlutterInappPurchase.instance.getProducts(skus);
+>>>>>>> new-version
           List<IAPItem> expected = (json.decode(result) as List)
               .map<IAPItem>(
                 (product) => IAPItem.fromJSON(product as Map<String, dynamic>),
@@ -249,6 +304,15 @@ void main() {
                 expectedProduct.introductoryPriceSubscriptionPeriodIOS);
             expect(product.subscriptionPeriodAndroid,
                 expectedProduct.subscriptionPeriodAndroid);
+<<<<<<< HEAD
+=======
+            expect(product.introductoryPriceCyclesAndroid,
+                expectedProduct.introductoryPriceCyclesAndroid);
+            expect(product.introductoryPricePeriodAndroid,
+                expectedProduct.introductoryPricePeriodAndroid);
+            expect(product.freeTrialPeriodAndroid,
+                expectedProduct.freeTrialPeriodAndroid);
+>>>>>>> new-version
           }
         });
       });
@@ -274,6 +338,7 @@ void main() {
             "subscriptionPeriodNumberIOS": "3",
             "introductoryPriceCyclesAndroid": 4,
             "introductoryPricePeriodAndroid": "5",
+<<<<<<< HEAD
             "freeTrialPeriodAndroid": "6",
             "discounts": [
               {
@@ -286,6 +351,9 @@ void main() {
                 "subscriptionPeriod": "123"
               }
             ]
+=======
+            "freeTrialPeriodAndroid": "6"
+>>>>>>> new-version
           }
         ];
 
@@ -293,8 +361,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "ios")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return result;
           });
@@ -345,12 +418,21 @@ void main() {
                 expectedProduct.introductoryPriceSubscriptionPeriodIOS);
             expect(product.subscriptionPeriodAndroid,
                 expectedProduct.subscriptionPeriodAndroid);
+<<<<<<< HEAD
             // expect(product.introductoryPriceCyclesAndroid,
             //     expectedProduct.introductoryPriceCyclesAndroid);
             // expect(product.introductoryPricePeriodAndroid,
             //     expectedProduct.introductoryPricePeriodAndroid);
             // expect(product.freeTrialPeriodAndroid,
             //     expectedProduct.freeTrialPeriodAndroid);
+=======
+            expect(product.introductoryPriceCyclesAndroid,
+                expectedProduct.introductoryPriceCyclesAndroid);
+            expect(product.introductoryPricePeriodAndroid,
+                expectedProduct.introductoryPricePeriodAndroid);
+            expect(product.freeTrialPeriodAndroid,
+                expectedProduct.freeTrialPeriodAndroid);
+>>>>>>> new-version
           }
         });
       });
@@ -359,7 +441,11 @@ void main() {
     group('getSubscriptions', () {
       group('for Android', () {
         final List<MethodCall> log = <MethodCall>[];
+<<<<<<< HEAD
         List<String> productIds = []..add("testsku");
+=======
+        List<String> skus = []..add("testsku");
+>>>>>>> new-version
 
         final dynamic result = """[
           {
@@ -386,8 +472,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "android")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return result;
           });
@@ -398,19 +489,31 @@ void main() {
         });
 
         test('invokes correct method', () async {
+<<<<<<< HEAD
           await FlutterInappPurchase.instance.getSubscriptions(productIds);
+=======
+          await FlutterInappPurchase.instance.getSubscriptions(skus);
+>>>>>>> new-version
           expect(log, <Matcher>[
             isMethodCall(
               'getSubscriptions',
               arguments: <String, dynamic>{
+<<<<<<< HEAD
                 'productIds': productIds,
+=======
+                'skus': skus,
+>>>>>>> new-version
               },
             ),
           ]);
         });
         test('returns correct result', () async {
           List<IAPItem> products =
+<<<<<<< HEAD
               await FlutterInappPurchase.instance.getSubscriptions(productIds);
+=======
+              await FlutterInappPurchase.instance.getSubscriptions(skus);
+>>>>>>> new-version
           List<IAPItem> expected = (json.decode(result) as List)
               .map<IAPItem>(
                 (product) => IAPItem.fromJSON(product as Map<String, dynamic>),
@@ -437,12 +540,21 @@ void main() {
                 expectedProduct.introductoryPriceSubscriptionPeriodIOS);
             expect(product.subscriptionPeriodAndroid,
                 expectedProduct.subscriptionPeriodAndroid);
+<<<<<<< HEAD
             // expect(product.introductoryPriceCyclesAndroid,
             //     expectedProduct.introductoryPriceCyclesAndroid);
             // expect(product.introductoryPricePeriodAndroid,
             //     expectedProduct.introductoryPricePeriodAndroid);
             // expect(product.freeTrialPeriodAndroid,
             //     expectedProduct.freeTrialPeriodAndroid);
+=======
+            expect(product.introductoryPriceCyclesAndroid,
+                expectedProduct.introductoryPriceCyclesAndroid);
+            expect(product.introductoryPricePeriodAndroid,
+                expectedProduct.introductoryPricePeriodAndroid);
+            expect(product.freeTrialPeriodAndroid,
+                expectedProduct.freeTrialPeriodAndroid);
+>>>>>>> new-version
           }
         });
       });
@@ -476,8 +588,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "ios")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return result;
           });
@@ -528,12 +645,21 @@ void main() {
                 expectedProduct.introductoryPriceSubscriptionPeriodIOS);
             expect(product.subscriptionPeriodAndroid,
                 expectedProduct.subscriptionPeriodAndroid);
+<<<<<<< HEAD
             // expect(product.introductoryPriceCyclesAndroid,
             //     expectedProduct.introductoryPriceCyclesAndroid);
             // expect(product.introductoryPricePeriodAndroid,
             //     expectedProduct.introductoryPricePeriodAndroid);
             // expect(product.freeTrialPeriodAndroid,
             //     expectedProduct.freeTrialPeriodAndroid);
+=======
+            expect(product.introductoryPriceCyclesAndroid,
+                expectedProduct.introductoryPriceCyclesAndroid);
+            expect(product.introductoryPricePeriodAndroid,
+                expectedProduct.introductoryPricePeriodAndroid);
+            expect(product.freeTrialPeriodAndroid,
+                expectedProduct.freeTrialPeriodAndroid);
+>>>>>>> new-version
           }
         });
       });
@@ -572,17 +698,27 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "android")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
             log.add(methodCall);
             var m = methodCall.arguments as Map<dynamic, dynamic>;
 
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+            log.add(methodCall);
+            var m = methodCall.arguments as Map<dynamic, dynamic>;
+>>>>>>> new-version
             if (m['type'] == 'inapp') {
               return resultInapp;
             } else if (m['type'] == 'subs') {
               return resultSubs;
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> new-version
             return null;
           });
         });
@@ -673,8 +809,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "ios")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return result;
           });
@@ -755,10 +896,16 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "android")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
             log.add(methodCall);
 
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+            log.add(methodCall);
+>>>>>>> new-version
             var m = methodCall.arguments as Map<dynamic, dynamic>;
             if (m['type'] == 'inapp') {
               return resultInapp;
@@ -856,8 +1003,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "ios")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return result;
           });
@@ -933,8 +1085,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "ios")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return null;
           });
@@ -968,7 +1125,11 @@ void main() {
 
       group('for Android', () {
         final List<MethodCall> log = <MethodCall>[];
+<<<<<<< HEAD
         final String productId = "testsku";
+=======
+        final String sku = "testsku";
+>>>>>>> new-version
         /*
         final dynamic result = {
           "transactionDate": "1552824902000",
@@ -989,8 +1150,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "android")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return null;
           });
@@ -1001,26 +1167,42 @@ void main() {
         });
 
         test('invokes correct method', () async {
+<<<<<<< HEAD
           await FlutterInappPurchase.instance.requestPurchase(productId);
+=======
+          await FlutterInappPurchase.instance.requestPurchase(sku);
+>>>>>>> new-version
           expect(log, <Matcher>[
             isMethodCall(
               'buyItemByType',
               arguments: <String, dynamic>{
                 'type': 'inapp',
+<<<<<<< HEAD
                 'productId': productId,
+=======
+                'sku': sku,
+>>>>>>> new-version
                 'prorationMode': -1,
                 'obfuscatedAccountId': null,
                 'obfuscatedProfileId': null,
                 'purchaseToken': null,
+<<<<<<< HEAD
                 'offerTokenIndex': null
+=======
+>>>>>>> new-version
               },
             ),
           ]);
         });
 
         test('returns correct result', () async {
+<<<<<<< HEAD
           expect(await FlutterInappPurchase.instance.requestPurchase(productId),
               null);
+=======
+          expect(
+              await FlutterInappPurchase.instance.requestPurchase(sku), null);
+>>>>>>> new-version
         });
       });
     });
@@ -1029,7 +1211,11 @@ void main() {
       group('for Android', () {
         final List<MethodCall> log = <MethodCall>[];
 
+<<<<<<< HEAD
         final String productId = "testsku";
+=======
+        final String sku = "testsku";
+>>>>>>> new-version
         /*
         final String result = """{
           "transactionDate":"1552824902000",
@@ -1049,8 +1235,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "android")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return null;
           });
@@ -1061,27 +1252,42 @@ void main() {
         });
 
         test('invokes correct method', () async {
+<<<<<<< HEAD
           await FlutterInappPurchase.instance.requestSubscription(productId);
+=======
+          await FlutterInappPurchase.instance.requestSubscription(sku);
+>>>>>>> new-version
           expect(log, <Matcher>[
             isMethodCall(
               'buyItemByType',
               arguments: <String, dynamic>{
                 'type': 'subs',
+<<<<<<< HEAD
                 'productId': productId,
+=======
+                'sku': sku,
+>>>>>>> new-version
                 'prorationMode': -1,
                 'obfuscatedAccountId': null,
                 'obfuscatedProfileId': null,
                 'purchaseToken': null,
+<<<<<<< HEAD
                 'offerTokenIndex': null
+=======
+>>>>>>> new-version
               },
             ),
           ]);
         });
 
         test('returns correct result', () async {
+<<<<<<< HEAD
           expect(
               await FlutterInappPurchase.instance
                   .requestSubscription(productId),
+=======
+          expect(await FlutterInappPurchase.instance.requestSubscription(sku),
+>>>>>>> new-version
               null);
         });
       });
@@ -1110,8 +1316,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "ios")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return null;
           });
@@ -1153,8 +1364,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "android")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return null;
           });
@@ -1194,8 +1410,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "android")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return null;
           });
@@ -1229,8 +1450,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "android")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return "Billing client has ended.";
           });
@@ -1277,8 +1503,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "ios")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return null;
           });
@@ -1353,8 +1584,13 @@ void main() {
           FlutterInappPurchase(FlutterInappPurchase.private(
               FakePlatform(operatingSystem: "ios")));
 
+<<<<<<< HEAD
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+=======
+          FlutterInappPurchase.channel
+              .setMockMethodCallHandler((MethodCall methodCall) async {
+>>>>>>> new-version
             log.add(methodCall);
             return result;
           });
@@ -1398,6 +1634,7 @@ void main() {
                 expectedProduct.introductoryPriceNumberOfPeriodsIOS);
             expect(product.introductoryPriceSubscriptionPeriodIOS,
                 expectedProduct.introductoryPriceSubscriptionPeriodIOS);
+<<<<<<< HEAD
             // expect(product.subscriptionPeriodAndroid,
             //     expectedProduct.subscriptionPeriodAndroid);
             // expect(product.introductoryPriceCyclesAndroid,
@@ -1406,6 +1643,16 @@ void main() {
             //     expectedProduct.introductoryPricePeriodAndroid);
             // expect(product.freeTrialPeriodAndroid,
             //     expectedProduct.freeTrialPeriodAndroid);
+=======
+            expect(product.subscriptionPeriodAndroid,
+                expectedProduct.subscriptionPeriodAndroid);
+            expect(product.introductoryPriceCyclesAndroid,
+                expectedProduct.introductoryPriceCyclesAndroid);
+            expect(product.introductoryPricePeriodAndroid,
+                expectedProduct.introductoryPricePeriodAndroid);
+            expect(product.freeTrialPeriodAndroid,
+                expectedProduct.freeTrialPeriodAndroid);
+>>>>>>> new-version
           }
         });
       });
@@ -1418,8 +1665,18 @@ void main() {
 
     group('validateReceiptAndroid', () {
       setUp(() {
+<<<<<<< HEAD
         FlutterInappPurchase(FlutterInappPurchase.private(
             FakePlatform(operatingSystem: "android")));
+=======
+        http.Client mockClient = MockClient((request) async {
+          return Response(json.encode({}), 200);
+        });
+
+        FlutterInappPurchase(FlutterInappPurchase.private(
+            FakePlatform(operatingSystem: "android"),
+            client: mockClient));
+>>>>>>> new-version
       });
 
       tearDown(() {
@@ -1469,8 +1726,18 @@ void main() {
       };
 
       setUp(() {
+<<<<<<< HEAD
         FlutterInappPurchase(FlutterInappPurchase.private(
           FakePlatform(operatingSystem: "ios"),
+=======
+        http.Client mockClient = MockClient((request) async {
+          return Response(json.encode({'status': 0}), 200);
+        });
+
+        FlutterInappPurchase(FlutterInappPurchase.private(
+          FakePlatform(operatingSystem: "ios"),
+          client: mockClient,
+>>>>>>> new-version
         ));
       });
 
@@ -1488,6 +1755,12 @@ void main() {
           response.request!.url.toString(),
           "https://sandbox.itunes.apple.com/verifyReceipt",
         );
+<<<<<<< HEAD
+=======
+        expect(response.statusCode, 200);
+        final data = jsonDecode(response.body);
+        expect(data['status'], 0);
+>>>>>>> new-version
       });
 
       test('returns correct http request url in production', () async {
@@ -1500,6 +1773,12 @@ void main() {
           response.request!.url.toString(),
           "https://buy.itunes.apple.com/verifyReceipt",
         );
+<<<<<<< HEAD
+=======
+        expect(response.statusCode, 200);
+        final data = jsonDecode(response.body);
+        expect(data['status'], 0);
+>>>>>>> new-version
       });
     });
   });

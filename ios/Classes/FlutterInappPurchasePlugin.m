@@ -286,6 +286,7 @@
 }
 
 - (void)productsRequest:(nonnull SKProductsRequest *)request didReceiveResponse:(nonnull SKProductsResponse *)response {
+<<<<<<< HEAD
     dispatch_async(dispatch_get_main_queue(), ^{
         NSValue* key = [NSValue valueWithNonretainedObject:request];
         FlutterResult result = [self.fetchProducts objectForKey:key];
@@ -303,6 +304,23 @@
 
         result(items);
     });
+=======
+    NSValue* key = [NSValue valueWithNonretainedObject:request];
+    FlutterResult result = [fetchProducts objectForKey:key];
+    if (result == nil) return;
+    [fetchProducts removeObjectForKey:key];
+
+    for (SKProduct* prod in response.products) {
+        [self addProduct:prod];
+    }
+    NSMutableArray* items = [NSMutableArray array];
+    
+    for (SKProduct* product in validProducts) {
+        [items addObject:[self getProductObject:product]];
+    }
+
+    result(items);
+>>>>>>> new-version
 }
 
 -(void)addProduct:(SKProduct *)aProd {

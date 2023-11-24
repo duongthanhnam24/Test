@@ -21,8 +21,12 @@
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
             android:hardwareAccelerated="true"
+<<<<<<< HEAD
             android:windowSoftInputMode="adjustResize"
             android:exported="true">
+=======
+            android:windowSoftInputMode="adjustResize">
+>>>>>>> new-version
 
 
             <!-- This keeps the window background of the activity showing
@@ -48,9 +52,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <receiver
             android:name="com.amazon.device.iap.ResponseReceiver"
             android:exported="true">
+=======
+        <receiver android:name = "com.amazon.device.iap.ResponseReceiver" >
+>>>>>>> new-version
             <intent-filter>
                 <action android:name = "com.amazon.inapp.purchasing.NOTIFY"
                     android:permission = "com.amazon.inapp.purchasing.Permission.NOTIFY" />
